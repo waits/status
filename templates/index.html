@@ -1,0 +1,7 @@
+<!doctype html>
+<title>Status</title>
+{% if request %}
+  <h1>Hello {{ request.host }}!</h1>
+{% else %}
+  <h1>Hello World!</h1>
+{% endif %}
