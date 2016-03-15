@@ -1,0 +1,8 @@
+{
+    "sites": [
+        {"name": "Wedding Expo", "url": "https://weddingexpo.co"},
+        {"name": "Admin Dashboard", "url": "https://admin.weddingexpo.co"},
+        {"name": "Bad URL Test", "url": "https://status.github.com/404"},
+        {"name": "Bad Domain Test", "url": "http://fake.example.com"}
+    ]
+}

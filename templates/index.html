@@ -1,7 +1,14 @@
-<!doctype html>
-<title>Status</title>
-{% if request %}
-  <h1>Hello {{ request.host }}!</h1>
-{% else %}
-  <h1>Hello World!</h1>
-{% endif %}
+<!DOCTYPE html>
+<title>System Status</title>
+
+<h1>Status</h1>
+{% for site in sites %}
+  <div class="site">
+    <label>{{site['name']}}:</label>
+  {% if site['status'] == 200 %}
+    <span>200 OK</span>
+  {% else %}
+    <strong>{{status}} NOT OK</strong>
+  {% endif %}
+  </div>
+{% endfor %}
