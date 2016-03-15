@@ -5,10 +5,10 @@
 {% for site in sites %}
   <div class="site">
     <label>{{site['name']}}:</label>
-  {% if site['status'] == 200 %}
-    <span>200 OK</span>
+  {% if site['status'] == 'OK' %}
+    <span>OK</span>
   {% else %}
-    <strong>{{status}} NOT OK</strong>
+    <strong>NOT OK - {{site['status']}}</strong>
   {% endif %}
   </div>
 {% endfor %}

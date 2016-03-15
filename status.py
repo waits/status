@@ -13,10 +13,12 @@ def hello_world():
     sites = config['sites']
     for site in sites:
         try:
-            r = requests.get(site['url'])
-            site['status'] = r.status_code
+            r = requests.get(site['url'], allow_redirects=False, timeout=5.0)
+            site['status'] = 'OK' if r.status_code == 200 else r.status_code
         except requests.exceptions.ConnectionError:
-            site['status'] = 0
+            site['status'] = 'connection error'
+        except requests.exceptions.Timeout:
+            site['status'] = 'timeout'
     return render_template('index.html', sites=sites)
 
 if __name__ == '__main__':
