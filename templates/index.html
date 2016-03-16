@@ -2,13 +2,17 @@
 <title>System Status</title>
 
 <h1>Status</h1>
-{% for site in sites %}
-  <div class="site">
-    <label>{{site['name']}}:</label>
-  {% if site['status'] == 'OK' %}
-    <span>OK</span>
-  {% else %}
-    <strong>NOT OK - {{site['status']}}</strong>
-  {% endif %}
-  </div>
-{% endfor %}
+{% if sites %}
+  {% for site in sites %}
+    <div class="site">
+      <label>{{site['name']}}:</label>
+    {% if site['status'] == 'OK' %}
+      <span>OK</span>
+    {% else %}
+      <strong>NOT OK - {{site['status']}}</strong>
+    {% endif %}
+    </div>
+  {% endfor %}
+{% else %}
+  <label>No sites have been configured yet.</label>
+{% endif %}

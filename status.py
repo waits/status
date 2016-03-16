@@ -5,12 +5,12 @@ import requests
 
 app = Flask(__name__)
 with open('config.json') as file:
-    config = json.load(file)
+    app.config['SITES'] = json.load(file)['sites']
     file.close()
 
 @app.route('/')
 def hello_world():
-    sites = config['sites']
+    sites = app.config['SITES']
     for site in sites:
         try:
             r = requests.get(site['url'], allow_redirects=False, timeout=5.0)
