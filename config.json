@@ -1,9 +1,12 @@
 {
     "sites": [
-        {"name": "Google", "url": "https://www.google.com"},
-        {"name": "Apple", "url": "https://github.com"},
-        {"name": "Redirect Test", "url": "https://accounts.google.com"},
-        {"name": "Not Found Test", "url": "https://www.google.com/login"},
-        {"name": "Bad Domain Test", "url": "http://fake.example.com"}
+        {"name": "Success", "url": "http://httpbin.org"},
+        {"name": "Another Success", "url": "http://httpbin.org/status/203"},
+        {"name": "Redirect", "url": "http://httpbin.org/redirect/1"},
+        {"name": "Not Found", "url": "http://httpbin.org/status/404"},
+        {"name": "Error", "url": "http://httpbin.org/status/500"},
+        {"name": "Slow Response", "url": "http://httpbin.org/delay/10"},
+        {"name": "SSL Error", "url": "https://54.175.219.8"},
+        {"name": "Bad Domain", "url": "http://fake.example.com"}
     ]
 }

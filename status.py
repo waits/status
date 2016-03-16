@@ -14,7 +14,7 @@ def hello_world():
     for site in sites:
         try:
             r = requests.get(site['url'], allow_redirects=False, timeout=5.0)
-            site['status'] = 'OK' if r.status_code == 200 else r.status_code
+            site['status'] = 'OK' if r.status_code >= 200 and r.status_code < 300 else r.status_code
         except requests.exceptions.ConnectionError:
             site['status'] = 'connection error'
         except requests.exceptions.Timeout:
