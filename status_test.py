@@ -22,5 +22,10 @@ class StatusTestCase(unittest.TestCase):
         r = self.app.get('/')
         assert 'Systems are down!' in str(r.data)
 
+    def test_mixed_status(self):
+        status.app.config['SITES'] = [{'name': 'Test Site', 'status': 200, 'last_checked': 1458245339}, {'name': 'Test Site', 'status': 404, 'last_checked': 1458245339}]
+        r = self.app.get('/')
+        assert 'Systems are down!' in str(r.data)
+
 if __name__ == '__main__':
     unittest.main()
