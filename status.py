@@ -9,17 +9,24 @@ with open('config.json') as file:
     file.close()
 
 @app.route('/')
-def hello_world():
+def root():
     sites = app.config['SITES']
+    master_status = 'green'
     for site in sites:
         try:
             r = requests.get(site['url'], allow_redirects=False, timeout=5.0)
-            site['status'] = 'OK' if r.status_code >= 200 and r.status_code < 300 else r.status_code
+            if r.status_code >= 200 and r.status_code < 300:
+                site['status'] = 'OK'
+            else:
+                site['status'] = r.status_code
+                master_status = 'red'
         except requests.exceptions.ConnectionError:
             site['status'] = 'connection error'
+            master_status = 'red'
         except requests.exceptions.Timeout:
             site['status'] = 'timeout'
-    return render_template('index.html', sites=sites)
+            master_status = 'red'
+    return render_template('index.html', sites=sites, master_status=master_status)
 
 if __name__ == '__main__':
     app.debug = True

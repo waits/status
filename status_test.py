@@ -15,12 +15,12 @@ class StatusTestCase(unittest.TestCase):
     def test_good_site(self):
         status.app.config['SITES'] = [{'name': 'Test Site', 'url': 'http://httpbin.org'}]
         r = self.app.get('/')
-        assert '<span>OK</span>' in str(r.data)
+        assert 'All systems operational.' in str(r.data)
 
     def test_bad_site(self):
         status.app.config['SITES'] = [{'name': 'Test Site', 'url': 'http://httpbin.org/status/404'}]
         r = self.app.get('/')
-        assert 'NOT OK - 404' in str(r.data)
+        assert 'Systems are down!' in str(r.data)
 
 if __name__ == '__main__':
     unittest.main()
