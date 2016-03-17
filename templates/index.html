@@ -18,6 +18,7 @@
     {% else %}
       <strong>NOT OK - {{site['status']}}</strong>
     {% endif %}
+    <small>Last checked at {{ site['last_checked'] }}.</small>
     </div>
   {% endfor %}
 {% else %}

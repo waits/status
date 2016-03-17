@@ -13,12 +13,12 @@ class StatusTestCase(unittest.TestCase):
         assert 'No sites have been configured yet.' in str(r.data)
 
     def test_good_site(self):
-        status.app.config['SITES'] = [{'name': 'Test Site', 'url': 'http://httpbin.org'}]
+        status.app.config['SITES'] = [{'name': 'Test Site', 'url': 'http://httpbin.org', 'status': 'OK', 'last_checked': 1458245339}]
         r = self.app.get('/')
         assert 'All systems operational.' in str(r.data)
 
     def test_bad_site(self):
-        status.app.config['SITES'] = [{'name': 'Test Site', 'url': 'http://httpbin.org/status/404'}]
+        status.app.config['SITES'] = [{'name': 'Test Site', 'url': 'http://httpbin.org/status/404', 'status': 404, 'last_checked': 1458245339}]
         r = self.app.get('/')
         assert 'Systems are down!' in str(r.data)
 

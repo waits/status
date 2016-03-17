@@ -4,9 +4,6 @@
         {"name": "Another Success", "url": "http://httpbin.org/status/203"},
         {"name": "Redirect", "url": "http://httpbin.org/redirect/1"},
         {"name": "Not Found", "url": "http://httpbin.org/status/404"},
-        {"name": "Error", "url": "http://httpbin.org/status/500"},
-        {"name": "Slow Response", "url": "http://httpbin.org/delay/10"},
-        {"name": "SSL Error", "url": "https://54.175.219.8"},
-        {"name": "Bad Domain", "url": "http://fake.example.com"}
+        {"name": "Error", "url": "http://httpbin.org/status/500"}
     ]
 }
