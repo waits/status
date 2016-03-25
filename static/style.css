@@ -1,0 +1,20 @@
+body {
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.wrap {
+  max-width: 600px;
+  margin: 40px auto 20px;
+}
+
+.alert {
+  margin: 10px 0;
+  padding: 5px 20px;
+}
+
+.red {
+  background-color: #ff9090;
+  color: #d02222;
+}

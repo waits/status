@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<title>System Status</title>
-
+{% extends "layout.html" %}
+{% block body %}
 <h1>Status</h1>
 
 {% if sites %}
   {% if master_status == 'green' %}
-    <div class="green"><h2>All systems operational.</h2></div>
+    <div class="alert green"><h2>All systems operational.</h2></div>
   {% else %}
-    <div class="red"><h2>Systems are down!</h2></div>
+    <div class="alert red"><h2>Systems are down!</h2></div>
   {% endif %}
 
   {% for site in sites %}
@@ -24,3 +23,4 @@
 {% else %}
   <label>No sites have been configured yet.</label>
 {% endif %}
+{% endblock %}
