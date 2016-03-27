@@ -2,11 +2,20 @@ from flask import Flask
 from flask import abort, redirect, render_template, url_for
 from sassutils.wsgi import SassMiddleware
 import json, requests, sched, threading, time
+
 app = Flask(__name__)
 app.debug = True
 app.wsgi_app = SassMiddleware(app.wsgi_app, {
     'status': ('static/sass', 'static/css')
 })
+
+with open('config.json') as file:
+    app.config['SITES'] = json.load(file)['sites']
+    file.close()
+@app.before_first_request
+def start_worker_thread():
+    t = threading.Thread(target=worker, daemon=True)
+    t.start()
 
 # Runs check_status() every 60 seconds
 def worker():
@@ -44,15 +53,6 @@ def root():
         t = time.strftime('%H:%M:%S', time.localtime(site['last_checked']))
         sites.append({'name': site['name'], 'status': site['status'], 'last_checked': t})
     return render_template('index.html', sites=sites, master_status=master_status)
-
-with open('config.json') as file:
-    app.config['SITES'] = json.load(file)['sites']
-    file.close()
-
-@app.before_first_request
-def start_worker_thread():
-    t = threading.Thread(target=worker, daemon=True)
-    t.start()
 
 if __name__ == '__main__':
     app.debug = True
