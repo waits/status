@@ -13,17 +13,22 @@ class StatusTestCase(unittest.TestCase):
         assert 'No sites have been configured yet.' in str(r.data)
 
     def test_good_site(self):
-        status.app.config['SITES'] = [{'name': 'Test Site', 'url': 'http://httpbin.org', 'status': 'OK', 'last_checked': 1458245339}]
+        status.app.config['SITES'] = [{'name': 'Test Site', 'url': 'http://httpbin.org', 'status': ('ok', 'All good'), 'last_checked': 1458245339}]
         r = self.app.get('/')
         assert 'All systems operational.' in str(r.data)
 
     def test_bad_site(self):
-        status.app.config['SITES'] = [{'name': 'Test Site', 'url': 'http://httpbin.org/status/404', 'status': 404, 'last_checked': 1458245339}]
+        status.app.config['SITES'] = [{'name': 'Test Site', 'url': 'http://httpbin.org/status/404', 'status': ('error', 'Reachable but returning errors'), 'last_checked': 1458245339}]
         r = self.app.get('/')
         assert 'Systems are down!' in str(r.data)
 
+    def test_mixed_site(self):
+        status.app.config['SITES'] = [{'name': 'Test Site', 'url': 'http://httpbin.org/status/404', 'status': ('caution', 'Slow response'), 'last_checked': 1458245339}]
+        r = self.app.get('/')
+        assert 'Some services may be degraded or unavailable.' in str(r.data)
+
     def test_mixed_status(self):
-        status.app.config['SITES'] = [{'name': 'Test Site', 'status': 200, 'last_checked': 1458245339}, {'name': 'Test Site', 'status': 404, 'last_checked': 1458245339}]
+        status.app.config['SITES'] = [{'name': 'Test Site', 'status': ('ok', 'All good'), 'last_checked': 1458245339}, {'name': 'Test Site', 'status': ('error', 'Timeout'), 'last_checked': 1458245339}]
         r = self.app.get('/')
         assert 'Systems are down!' in str(r.data)
 

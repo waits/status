@@ -1,0 +1,80 @@
+@import 'normalize';
+@import 'variables';
+@import 'helpers';
+
+/* General */
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  color: #333;
+  font-family: "HelveticaNeue-Light";
+  margin: 0;
+  padding: 0;
+}
+
+.wrap {
+  max-width: 600px;
+  margin: 40px auto 20px;
+}
+
+ul {
+  padding: 0;
+}
+
+/* Top Area */
+
+h1 {
+  font-weight: 300;
+}
+
+.alert {
+  border: 1px solid #999;
+  border-radius: 3px;
+  margin: 10px 0;
+  padding: 5px 20px;
+  &.ok {
+    background-color: #eaf4ef;
+    border-color: #99ccb2;
+    color: $ok;
+  }
+  &.caution {
+    background: #fdf5ed;
+    border-color: #f8cea7;
+    color: $caution;
+  }
+  &.error {
+    background-color: #f9eae5;
+    border-color: #e5997f;
+    color: $error;
+  }
+}
+
+/* Services */
+
+.service {
+  background-color: white;
+  border-bottom: 1px solid #e5e5e5;
+  list-style: none;
+  height: 62px;
+  margin: 0;
+  padding: 17px 14px;
+  width: 100%;
+  &:last-child {
+    border-bottom: none;
+  }
+  .row {
+    display: table;
+    width: 100%;
+    .cell {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+  .status {
+    padding: 0 14px;
+    text-align: right;
+  }
+}

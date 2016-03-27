@@ -1,0 +1,14 @@
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+@each $name, $color in (ok: $ok, caution: $caution, error: $error) {
+  .#{$name} {
+    color: $color;
+    fill: $color;
+  }
+}

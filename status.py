@@ -1,7 +1,11 @@
 from flask import Flask
 from flask import abort, redirect, render_template, url_for
+from sassutils.wsgi import SassMiddleware
 import json, requests, sched, threading, time
 app = Flask(__name__)
+app.wsgi_app = SassMiddleware(app.wsgi_app, {
+    'status': ('static/sass', 'static/css')
+})
 
 # Runs check_status() every 60 seconds
 def worker():
@@ -17,23 +21,25 @@ def check_status():
         print('Checking ' + site['url'])
         try:
             r = requests.get(site['url'], allow_redirects=False, timeout=5.0)
-            if r.status_code >= 200 and r.status_code < 300:
-                site['status'] = 'OK'
+            if 200 <= r.status_code <= 299:
+                site['status'] = ('ok', 'All good')
+            elif 300 <= r.status_code <= 399:
+                site['status'] = ('caution', 'Unexpected redirect')
             else:
-                site['status'] = r.status_code
+                site['status'] = ('error', 'Reachable but returning errors'.format(r.status_code))
         except requests.exceptions.ConnectionError:
-            site['status'] = 'connection error'
+            site['status'] = ('error', 'Unreachable')
         except requests.exceptions.Timeout:
-            site['status'] = 'timeout'
+            site['status'] = ('error', 'Timeout')
         site['last_checked'] = time.time()
 
 @app.route('/')
 def root():
-    master_status = 'green'
+    master_status = 'ok'
     sites = list()
     for site in app.config['SITES']:
         if 'status' not in site: continue
-        if site['status'] != 'OK': master_status = 'red'
+        if site['status'][0] != 'ok': master_status = site['status'][0]
         t = time.strftime('%H:%M:%S', time.localtime(site['last_checked']))
         sites.append({'name': site['name'], 'status': site['status'], 'last_checked': t})
     return render_template('index.html', sites=sites, master_status=master_status)

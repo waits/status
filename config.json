@@ -1,9 +1,8 @@
 {
     "sites": [
-        {"name": "Success", "url": "http://httpbin.org"},
-        {"name": "Another Success", "url": "http://httpbin.org/status/203"},
-        {"name": "Redirect", "url": "http://httpbin.org/redirect/1"},
-        {"name": "Not Found", "url": "http://httpbin.org/status/404"},
-        {"name": "Error", "url": "http://httpbin.org/status/500"}
+        {"name": "Main Website", "url": "http://httpbin.org"},
+        {"name": "CDN", "url": "http://httpbin.org/redirect/1"},
+        {"name": "Admin Dashboard", "url": "http://httpbin.org/status/503"},
+        {"name": "Payment Processor", "url": "http://nositehere.example.com"}
     ]
 }
