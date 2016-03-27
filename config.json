@@ -1,8 +1,8 @@
 {
     "sites": [
-        {"name": "Main Website", "url": "http://httpbin.org"},
-        {"name": "CDN", "url": "http://httpbin.org/redirect/1"},
-        {"name": "Admin Dashboard", "url": "http://httpbin.org/status/503"},
-        {"name": "Payment Processor", "url": "http://nositehere.example.com"}
+        {"name": "Service 1", "url": "http://httpbin.org"},
+        {"name": "Service 2", "url": "http://httpbin.org/redirect/1"},
+        {"name": "Service 3", "url": "http://httpbin.org/status/503"},
+        {"name": "Service 4", "url": "http://nositehere.example.com"}
     ]
 }

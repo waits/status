@@ -61,5 +61,4 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 
-sites.json
 static/css/

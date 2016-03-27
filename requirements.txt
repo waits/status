@@ -1,3 +1,4 @@
 Flask ~= 0.10.1
 requests ~= 2.9.1
 libsass ~= 0.11.0
+gunicorn ~= 19.4.5
