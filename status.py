@@ -32,7 +32,7 @@ def check_status():
         try:
             r = requests.get(site['url'], allow_redirects=False, timeout=5.0)
             if 200 <= r.status_code <= 299:
-                site['status'] = ('ok', 'All good')
+                site['status'] = ('ok', 'Online')
             elif 300 <= r.status_code <= 399:
                 site['status'] = ('caution', 'Unexpected redirect')
             else:

@@ -7,7 +7,7 @@
   {% if master_status == 'ok' %}
     <h3>All systems operational.</h3>
   {% elif master_status == 'caution' %}
-    <h3>Some services may be degraded or unavailable.</h3>
+    <h3>Some services may be unavailable.</h3>
   {% else %}
     <h3>Systems are down!</h3>
   {% endif %}
@@ -18,10 +18,10 @@
       <li class="service">
         <div class="row">
           <div class="cell" style="width: 300px"><strong>{{site['name']}}</strong></div>
-          <div class="cell status {{site['status'][0]}}">
+          <div class="cell status {{site['status'][0]}}" title="Last checked at {{site['last_checked']}} PST">
             <span>{{site['status'][1]}}</span>
           </div>
-          <div class="cell {{site['status'][0]}}" style="width: 31px">
+          <div class="cell {{site['status'][0]}}" style="width: 31px" title="Last checked at {{site['last_checked']}} PST">
             {% include 'svg/' + site['status'][0] + '.svg' %}
           </div>
         </div>

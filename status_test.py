@@ -25,7 +25,7 @@ class StatusTestCase(unittest.TestCase):
     def test_mixed_site(self):
         status.app.config['SITES'] = [{'name': 'Test Site', 'url': 'http://httpbin.org/status/404', 'status': ('caution', 'Slow response'), 'last_checked': 1458245339}]
         r = self.app.get('/')
-        assert 'Some services may be degraded or unavailable.' in str(r.data)
+        assert 'Some services may be unavailable.' in str(r.data)
 
     def test_mixed_status(self):
         status.app.config['SITES'] = [{'name': 'Test Site', 'status': ('ok', 'All good'), 'last_checked': 1458245339}, {'name': 'Test Site', 'status': ('error', 'Timeout'), 'last_checked': 1458245339}]
